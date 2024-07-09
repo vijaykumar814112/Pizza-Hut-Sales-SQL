@@ -1,0 +1,11 @@
+USE PIZZAHUT;
+-- Group the orders by date and calculate the average number of pizzas ordered per day.
+SELECT 
+    ROUND(AVG(QUANTITY), 0)
+FROM
+    (SELECT 
+        ORDERS.ORDER_DATE, SUM(ORDER_DETAILS.QUANTITY) AS QUANTITY
+    FROM
+        ORDERS
+    JOIN ORDER_DETAILS ON ORDERS.ORDER_ID = ORDER_DETAILS.ORDER_ID
+    GROUP BY ORDERS.ORDER_DATE) AS QTY; 
